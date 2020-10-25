@@ -1,0 +1,20 @@
+replace() {
+
+    __process() {
+        __in="$3"
+        __out=''
+        while [ "${__in}" != "${__in%%"${1}"*}" ]; do
+            __out="${__out}${__in%%"${1}"*}${2}"
+            __in="${__in#*"${1}"}"
+        done
+        echo -n "${__out}${__in}"
+    }
+
+    while IFS= read -r __line; do
+        __process "$1" "$2" "$__line" ; echo
+    done
+    __process "$1" "$2" "$__line"
+}
+
+# demo
+echo -n "Input string" | replace t T
