@@ -1,19 +1,16 @@
 replace() {
-
-    __process() {
-        __in="$3"
-        __out=''
+    __last=
+    while :; do
+        IFS= read -r __in || __last=1
+        __out=
         while [ "${__in}" != "${__in%%"${1}"*}" ]; do
             __out="${__out}${__in%%"${1}"*}${2}"
             __in="${__in#*"${1}"}"
         done
         echo -n "${__out}${__in}"
-    }
-
-    while IFS= read -r __line; do
-        __process "$1" "$2" "$__line" ; echo
+        [ -z "${__last}" ] || break
+        echo 
     done
-    __process "$1" "$2" "$__line"
 }
 
 # demo
