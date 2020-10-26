@@ -2,7 +2,7 @@ replace() {
     __last=
     while :; do
         IFS= read -r __in || __last=1
-        __out=''
+        __out=
         while [ "${__in}" != "${__in%%"${1}"*}" ]; do
             __out="${__out}${__in%%"${1}"*}${2}"
             __in="${__in#*"${1}"}"
