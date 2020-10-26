@@ -6,22 +6,19 @@
 # empty quoted string.
 
 apply_template() {
-    
-    __process() {
-        __in="$1"
-        __out=''
+    __last=
+    while :; do
+        IFS= read -r __in || __last=1
+        __out=
         while [ "${__in}" != "${__in%%{{*}" ]; do
             __next="${__in#*{{}"
             __out="${__out}${__in%%{{*}$(eval echo \""${__next%%\}\}*}"\")"
             __in="${__in#*\}\}}"
         done
         echo -n "${__out}${__in}"
-    }
-
-    while IFS= read -r __line; do
-        __process "${__line}" ; echo
+        [ -z "${__last}" ] || break
+        echo
     done
-    __process "${__line}"
 }
 
 # demo
