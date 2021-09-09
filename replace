@@ -12,6 +12,3 @@ replace() {
         echo 
     done
 }
-
-# demo
-echo -n "Input string" | replace t T
