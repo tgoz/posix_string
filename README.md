@@ -14,12 +14,12 @@ should be quoted, or separated from the {{ }} delimiters with an empty quoted st
 
     echo -n "Input string" | replace t T
     
-    echo -n 'pid={{$$}}' | apply_template
+    echo -n 'pid=[{[$$]}]' | apply_template
     
     cat <<'EOF' | apply_template
-    Document generated at {{$(date)}}
+    Document generated at [{[$(date)]}]
 
-    User {{${USERNAME}""}} has uid={{$UID}}.
+    User [{[${USERNAME}]}] has uid=[{[$UID]}].
 
-    PID={{$$}}
+    PID=[{[$$]}]
     EOF
