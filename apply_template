@@ -20,13 +20,3 @@ apply_template() {
         echo
     done
 }
-
-# demo
-echo -n 'pid={{$$}}' | apply_template
-cat <<'EOF' | apply_template
-Document generated at {{$(date)}}
-
-User {{${USERNAME}""}} has uid={{$UID}}.
-
-PID={{$$}}
-EOF
