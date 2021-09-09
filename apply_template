@@ -1,19 +1,17 @@
-# apply template values, specified by {{  }}
+# apply template values, specified by [{[  ]}]
 # contents of substitution may be anything which can be echo'ed;
 # in particular, shell variables (e.g. ${VAR} ) and commands
-# (e.g. $(date) ). Substitutions beginning with { or ending with }
-# should be quoted, or separated from the {{ }} delimiters with an
-# empty quoted string.
+# (e.g. $(date) ).
 
 apply_template() {
     __last=
     while :; do
         IFS= read -r __in || __last=1
         __out=
-        while [ "${__in}" != "${__in%%{{*}" ]; do
-            __next="${__in#*{{}"
-            __out="${__out}${__in%%{{*}$(eval echo \""${__next%%\}\}*}"\")"
-            __in="${__in#*\}\}}"
+        while [ "${__in}" != "${__in%%[{[*}" ]; do
+            __next="${__in#*[{[}"
+            __out="${__out}${__in%%[{[*}$(eval echo \""${__next%%]\}]*}"\")"
+            __in="${__in#*]\}]}"
         done
         echo -n "${__out}${__in}"
         [ -z "${__last}" ] || break
