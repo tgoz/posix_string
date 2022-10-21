@@ -3,7 +3,7 @@
 Believed to be compatible with Bourne (posix), ash, dash, bash, zsh, and probably other similar shells.
 
 Templating is driven by shell substitutions in [{[ ]}]. Contents of substitution may be anything which can be echo'ed;
-in particular, shell variables (e.g. ${VAR} ) and commands (e.g. $(date) ).
+in particular, shell variables (e.g. `${VAR}` ) and commands (e.g. `$(date)` ).
 
 ## Examples
 
